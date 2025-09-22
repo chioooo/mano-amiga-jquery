@@ -1,0 +1,397 @@
+/* RESET GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY EN MODO LOGIN/REGISTER */
+body.login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../img/brazas.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY EN MODO MAIN-PAGE */
+body.main-page {
+    display: block;
+    min-height: 100vh;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.spa-container {
+    width: 100%;
+}
+
+/* LOGIN Y REGISTRO */
+.auth-page {
+    width: 350px;
+    margin: 180px auto;
+    background: #fff3f3;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.auth-page h2 {
+    color: #e53935;
+    margin-bottom: 20px;
+}
+
+.auth-page input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #e53935;
+    border-radius: 6px;
+}
+
+.auth-page button {
+    width: 100%;
+    padding: 12px;
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-page button:hover {
+    background: #ff7043;
+}
+
+.auth-page p {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.auth-page span {
+    color: #e53935;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* MAIN PAGE */
+#main-page {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background: #f3eaea;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #e53935, #ff7043);
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    gap: 15px;
+}
+
+.sidebar a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 70px 20px 20px; /* solo mantener espacio para la topbar */
+    box-sizing: border-box;
+}
+
+/* BARRA SUPERIOR */
+.topbar {
+    height: 60px;
+    background: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    z-index: 100;
+}
+
+.user-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e53935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* PUBLICACIONES */
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;  /* usar todo el ancho disponible */
+    max-width: none; /* quitar el límite */
+}
+
+/* Cada post */
+.post {
+    display: flex;
+    flex-direction: column;
+    background: #fff3f3;
+    border-left: 6px solid #e53935;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    width: 100%;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-header h3 {
+    margin: 0;
+    color: #e53935;
+}
+
+.level {
+    background: #ffccbc;
+    color: #e64a19;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.post-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap; /* que baje la imagen si no cabe */
+}
+
+.post-body p {
+    margin: 6px 0;
+    line-height: 1.6;
+}
+
+.resources ul {
+    margin: 5px 0 0 20px;
+}
+
+.post-footer {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.join-btn {
+    background: #ff7043;
+    border: none;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.join-btn:hover {
+    background: #e64a19;
+}
+
+.counter {
+    font-weight: bold;
+    color: #e53935;
+}
+
+.derecha img {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section {
+    display: none; /* todas ocultas por defecto */
+    padding: 20px;
+}
+
+/* sección visible */
+.section.active {
+    display: block;
+}
+
+/* sidebar activo */
+.sidebar a.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tabla Siniestros */
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla th, .tabla td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla th {
+    background-color: #e53935;
+    color: white;
+}
+
+.tabla tr {background-color: #f6f6f6;}
+
+/* Botón Crear Siniestro */
+#btn-new-siniestro {
+    background: #e53935;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#btn-new-siniestro:hover {
+    background: #ff7043;
+}
+
+/* Modal */
+#modal-siniestro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#modal-siniestro.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+#modal-siniestro .modal-content {
+    background: #fff3f3;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+}
+
+#modal-siniestro input, #modal-siniestro button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #e53935;
+}
+
+#modal-siniestro button {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#modal-siniestro button:hover {
+    background: #ff7043;
+}
+
+.btn-edit {
+    background: #3599e5;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-delete {
+    background: #ff0045;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-btn .dropdown {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+    padding: 8px 0;
+    min-width: 140px;
+    z-index: 1000;
+}
+
+.user-btn .dropdown button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.user-btn .dropdown button:hover {
+    background: #f2f2f2;
+}
