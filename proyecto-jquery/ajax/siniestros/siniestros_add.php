@@ -1,6 +1,6 @@
 <?php
 global $pdo;
-include "db_connection.php";
+include "../db_connection.php";
 
 $location  = $_POST['location'];
 $level     = $_POST['level'];

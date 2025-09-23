@@ -1,6 +1,6 @@
 <?php
 global $pdo;
-include "db_connection.php";
+include "../db_connection.php";
 
 $sql = "SELECT * FROM siniestros ORDER BY id DESC";
 $stmt = $pdo->query($sql);
