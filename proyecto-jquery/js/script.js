@@ -144,7 +144,7 @@ $(document).ready(function () {
         let resources = $("#resources").val();
         let active = $("#active").is(":checked") ? 1 : 0;
 
-        let url = id ? "ajax/siniestros/siniestros_update.php" : "ajax/siniestros_add.php";
+        let url = id ? "ajax/siniestros/siniestros_update.php" : "ajax/siniestros/siniestros_add.php";
 
         $.post(url, {
             id,
@@ -227,7 +227,7 @@ $(document).ready(function () {
 
     // Cargar siniestros en tabla
     function cargarSiniestros() {
-        $.get("ajax/siniestros_list.php", function (res) {
+        $.get("ajax/siniestros/siniestros_list.php", function (res) {
             let tbody = $("#siniestros-table tbody");
             tbody.empty();
             res.forEach(s => {
@@ -259,9 +259,9 @@ $(document).ready(function () {
 
     //Cargar siniestros en posts
     function cargarPosts() {
-        $.get("ajax/siniestros_list.php", function (res) {
+        $.get("ajax/siniestros/siniestros_list.php", function (res) {
             let postsContainer = $("#inicio .posts");
-            postsContainer.empty(); // limpiamos los posts
+            postsContainer.empty();
 
             res.forEach(s => {
                 postsContainer.append(`
