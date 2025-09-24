@@ -298,7 +298,7 @@ body.main-page {
 }
 
 /* Modal */
-#modal-siniestro {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -313,20 +313,20 @@ body.main-page {
     transition: opacity 0.3s;
 }
 
-#modal-siniestro.active {
+.modal.active {
     opacity: 1;
     pointer-events: auto;
 }
 
 
-#modal-siniestro .modal-content {
+.modal .modal-content {
     background: #fff3f3;
     padding: 20px;
     border-radius: 12px;
     width: 400px;
 }
 
-#modal-siniestro input, #modal-siniestro button {
+.modal input, .modal button {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -334,7 +334,7 @@ body.main-page {
     border: 1px solid #e53935;
 }
 
-#modal-siniestro button {
+.modal button {
     background: #e53935;
     color: #fff;
     border: none;
@@ -342,11 +342,11 @@ body.main-page {
     font-weight: bold;
 }
 
-#modal-siniestro button:hover {
+.modal button:hover {
     background: #ff7043;
 }
 
-.btn-edit {
+.edit {
     background: #3599e5;
     color: #fff;
     padding: 10px 10px;
@@ -357,7 +357,7 @@ body.main-page {
     margin-bottom: 10px;
 }
 
-.btn-delete {
+.delete {
     background: #ff0045;
     color: #fff;
     padding: 10px 10px;

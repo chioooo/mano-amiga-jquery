@@ -104,7 +104,7 @@
         </div>
 
         <!-- Modal Crear Siniestro -->
-        <div id="modal-siniestro">
+        <div id="modal-siniestro" class="modal">
             <div class="modal-content">
                 <h3>Nuevo Siniestro</h3>
                 <form id="siniestro-form">
@@ -117,6 +117,23 @@
                     <input type="checkbox" id="active" checked>
                     <button type="submit">Guardar</button>
                     <button type="button" id="cerrar-modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal editar usuarios -->
+        <div id="modal-usuarios" class="modal">
+            <div class="modal-content">
+                <h3>Editar usuario</h3>
+                <form id="usuario-form">
+                    <input type="hidden" id="usuario_id">
+                    <input type="text" id="fullname" placeholder="Nombre completo" required>
+                    <input type="text" id="username" placeholder="Nombre de usuario" required>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <label>Administrador: </label>
+                    <input type="checkbox" id="is_admin" checked>
+                    <button type="submit">Guardar</button>
+                    <button type="button" id="cerrar-modal-usuarios">Cancelar</button>
                 </form>
             </div>
         </div>

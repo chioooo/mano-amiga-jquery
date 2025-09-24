@@ -133,6 +133,18 @@ $(document).ready(function () {
         }
     });
 
+    // Cerrar modal usuarios
+    $("#cerrar-modal-usuarios").click(function () {
+        $("#modal-usuarios").removeClass("active");
+    });
+
+    // Cerrar
+    $("#modal-usuarios").click(function (e) {
+        if (e.target === this) {
+            $(this).removeClass("active");
+        }
+    });
+
     // Guardar siniestro
     $("#siniestro-form").submit(function (e) {
         e.preventDefault();
@@ -166,7 +178,7 @@ $(document).ready(function () {
     });
 
     // Editar
-    $(document).on("click", ".btn-edit", function () {
+    $(document).on("click", "#btn-edit", function () {
         let id = $(this).data("id");
 
         $.get("ajax/siniestros/siniestros_get.php", {id}, function (res) {
@@ -183,7 +195,7 @@ $(document).ready(function () {
         }, "json");
     });
 
-    // Eliminar
+    // Eliminar siniestros
     let siniestroIdToDelete = null;
     $("#confirmDeleteDialog").dialog({
         autoOpen: false,
@@ -220,7 +232,7 @@ $(document).ready(function () {
     });
 
 // boton eliminar
-    $(document).on("click", ".btn-delete", function () {
+    $(document).on("click", "#btn-delete", function () {
         siniestroIdToDelete = $(this).data("id");
         $("#confirmDeleteDialog").dialog("open");
     });
@@ -240,18 +252,14 @@ $(document).ready(function () {
                     <td>${s.resources}</td>
                     <td>${s.active == 1 ? "Sí" : "No"}</td>
                     <td>
-                        <button class="btn-edit" data-id="${s.id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn-delete" data-id="${s.id}"><i class="fa-solid fa-trash"></i></button>
+                        <button id="btn-edit" class="edit" data-id="${s.id}"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button id="btn-delete" class="delete" data-id="${s.id}"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
             `);
             });
         }, "json");
     }
-
-    $(".btn-delete").tooltip({
-        content: "Eliminar"
-    });
 
     $(".menu-item[data-section='siniestros']").click(function () {
         cargarSiniestros();
@@ -303,21 +311,17 @@ $(document).ready(function () {
         $.get("ajax/usuarios/usuarios_list.php", function (res) {
             let tbody = $("#usuarios-table tbody");
             tbody.empty();
-            res.forEach(s => {
+            res.forEach(u => {
                 tbody.append(`
                 <tr>
-                    <td>${s.id}</td>
-                    <td>${s.full_name}</td>
-                    <td>${s.username}</td>
-                    <td>${s.is_admin == 1 ? "Sí" : "No"}</td>
-                    <td>${s.siniestro_id || ''}</td>
+                    <td>${u.id}</td>
+                    <td>${u.full_name}</td>
+                    <td>${u.username}</td>
+                    <td>${u.is_admin === 1 ? "Sí" : "No"}</td>
+                    <td>${u.siniestro_id || ''}</td>
                     <td>
-                        <button class="btn-edit-user">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button class="btn-delete-user">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <button id="btn-edit-user" class="edit" data-id="${u.id}"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button id="btn-delete-user" class="delete" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
             `);
@@ -327,5 +331,22 @@ $(document).ready(function () {
 
     $(".menu-item[data-section='usuarios']").click(function () {
         cargarUsuarios();
+    });
+
+    // Editar usuario
+    $(document).on("click", "#btn-edit-user", function () {
+        let id = $(this).data("id");
+
+        $.get("ajax/usuarios/usuarios_get.php", {id}, function (res) {
+            if (res) {
+                $("#usuario_id").val(res.id);
+                $("#fullname").val(res.full_name);
+                $("#username").val(res.username);
+                $("#password").val('');
+                $("#is_admin").prop("checked", res.is_admin == 1);
+
+                $("#modal-usuarios").addClass("active");
+            }
+        }, "json");
     });
 });
