@@ -6,6 +6,15 @@ $(document).ready(function () {
             $("#main-page").show();
             $("#inicio").addClass("active");
             $(".sidebar a[data-section='inicio']").addClass("active");
+            if (res.is_admin === 0) {
+                $(".sidebar a").hide();
+                $(".sidebar a[data-section='inicio']").show();
+                $(".sidebar a[data-section='profile-section']").show();
+                $("#inicio").addClass("active");
+                $(".sidebar a[data-section='inicio']").addClass("active");
+            } else {
+                $(".sidebar a").show();
+            }
             cargarPosts();
         } else {
             $("#login-page").show();
@@ -54,6 +63,7 @@ $(document).ready(function () {
                 if (res.is_admin === 0) {
                     $(".sidebar a").hide();
                     $(".sidebar a[data-section='inicio']").show();
+                    $(".sidebar a[data-section='perfil']").show();
                     $("#inicio").addClass("active");
                     $(".sidebar a[data-section='inicio']").addClass("active");
                 } else {
@@ -84,17 +94,6 @@ $(document).ready(function () {
 
     $(".menu-item[data-section='inicio']").click(function () {
         cargarPosts();
-    });
-
-    //Dropdown usuario
-    $(".user-btn i").on("click", function () {
-        $(".user-btn .dropdown").toggle();
-    });
-
-    $(document).on("click", function (e) {
-        if (!$(e.target).closest(".user-btn").length) {
-            $(".user-btn .dropdown").hide();
-        }
     });
 
     //Cerrar sesión

@@ -43,6 +43,7 @@
             <h2>Menú</h2>
             <a href="#" class="menu-item active" data-section="inicio"><i class="fas fa-home"></i> Inicio</a>
             <a href="#" class="menu-item" data-section="usuarios"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="#" class="menu-item" data-section="profile-section"><i class="fas fa-user"></i> Perfil</a>
             <a href="#" class="menu-item" data-section="recursos"><i class="fas fa-boxes"></i> Recursos</a>
             <a href="#" class="menu-item" data-section="siniestros"><i class="fa-solid fa-skull-crossbones"></i>
                 Siniestros</a>
@@ -51,12 +52,8 @@
         <!-- Contenido principal -->
         <div class="main-content">
             <div class="topbar">
-                <div class="user-btn">
-                    <i class="fas fa-user"></i>
-                    <div class="dropdown">
-                        <button id="btn-profile">Ver Perfil</button>
-                        <button id="btn-logout">Cerrar Sesión</button>
-                    </div>
+                <div >
+                    <button id="btn-logout" class="join-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
             </div>
 
@@ -101,6 +98,34 @@
                     <tbody></tbody>
                 </table>
             </div>
+
+            <!-- Perfil -->
+            <div id="profile-section" class="section">
+                <div class="perfil">
+                    <div class="profile">
+                        <div id="avatar">
+                            <img src="img/perfil.jpg" alt="foto de perfil">
+                            <div class="user-info">
+                                <h2> Nombre: Patricia Marlene Bravo Reyes</h2>
+                                <h2>Usuario: mar n</h2>
+                                <h2>Tipo de usuario: voluntario</h2>
+                                <p>Activa desde septiembre del 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="info">
+                        <h3>Puntos: 150xp</h3>
+                        <h3>Insignias</h3>
+                        <div class="badges">
+                            <img src="img/flamita.png" alt="Flamita">
+                            <img src="img/Novato.png" alt="Novato apaga fuegos">
+                            <img src="img/Exp_apg_f.png" alt="Experto apaga fuegos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Modal Crear Siniestro -->
