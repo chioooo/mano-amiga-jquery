@@ -63,7 +63,7 @@ $(document).ready(function () {
                 if (res.is_admin === 0) {
                     $(".sidebar a").hide();
                     $(".sidebar a[data-section='inicio']").show();
-                    $(".sidebar a[data-section='perfil']").show();
+                    $(".sidebar a[data-section='profile-section']").show();
                     $("#inicio").addClass("active");
                     $(".sidebar a[data-section='inicio']").addClass("active");
                 } else {
@@ -361,13 +361,13 @@ $(document).ready(function () {
         let password = $("#password").val();
         let is_admin = $("#is_admin").is(":checked") ? 1 : 0;
 
-        $.post("ajax/usuarios/usuarios_update.php", {
-            id,
-            fullname,
-            username,
-            password,
-            is_admin
-        }, function (res) {
+        let data = { id, fullname, username, is_admin };
+
+        if (password.trim() !== '') {
+            data.password = password;
+        }
+
+        $.post("ajax/usuarios/usuarios_update.php", data, function (res) {
             if (res.status === "success") {
                 $("#modal-usuarios").removeClass("active");
                 $("#usuario-form")[0].reset();
