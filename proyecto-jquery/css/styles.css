@@ -20,6 +20,7 @@ body.login-register {
 body.main-page {
     display: block;
     min-height: 100vh;
+    background: #f3eaea;
 }
 
 /* CONTENEDOR PRINCIPAL */
@@ -94,6 +95,8 @@ body.main-page {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    height: 100vh;
 }
 
 .sidebar h2 {
@@ -124,6 +127,7 @@ body.main-page {
     flex-direction: column;
     padding: 70px 20px 20px; /* solo mantener espacio para la topbar */
     box-sizing: border-box;
+    margin-left: 250px;
 }
 
 /* BARRA SUPERIOR */
@@ -160,7 +164,7 @@ body.main-page {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    width: 100%;  /* usar todo el ancho disponible */
+    width: 100%; /* usar todo el ancho disponible */
     max-width: none; /* quitar el límite */
 }
 
@@ -174,6 +178,7 @@ body.main-page {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
     width: 100%;
+    position: relative;
 }
 
 .post-header {
@@ -219,7 +224,7 @@ body.main-page {
     gap: 18px;
 }
 
-.join-btn {
+.kill-btn {
     background: #ff7043;
     border: none;
     color: #fff;
@@ -230,7 +235,7 @@ body.main-page {
     transition: background 0.3s;
 }
 
-.join-btn:hover {
+.kill-btn:hover {
     background: #e64a19;
 }
 
@@ -279,7 +284,9 @@ body.main-page {
     color: white;
 }
 
-.tabla tr {background-color: #f6f6f6;}
+.tabla tr {
+    background-color: #f6f6f6;
+}
 
 /* Botón Crear Siniestro */
 #btn-new-siniestro {
@@ -304,7 +311,7 @@ body.main-page {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -368,34 +375,6 @@ body.main-page {
     margin-bottom: 10px;
 }
 
-.user-btn .dropdown {
-    display: none; /* Oculto por defecto */
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
-    padding: 8px 0;
-    min-width: 140px;
-    z-index: 1000;
-}
-
-.user-btn .dropdown button {
-    display: block;
-    width: 100%;
-    padding: 8px 12px;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-}
-
-.user-btn .dropdown button:hover {
-    background: #f2f2f2;
-}
-
 #avatar {
     display: flex;
     align-items: flex-start;
@@ -428,3 +407,18 @@ body.main-page {
     line-height: 1.6;
 }
 
+.perfil-container {
+    display: flex;
+    gap: 2rem; /* espacio entre usuario y siniestro */
+    align-items: flex-start; /* alinear arriba */
+}
+
+.siniestro-info {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    min-width: 250px;
+}
+
+.siniestro-info p {
+    margin-bottom: 20px; /* separa cada párrafo */
+}

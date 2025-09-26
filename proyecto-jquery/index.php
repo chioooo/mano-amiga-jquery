@@ -53,7 +53,7 @@
         <div class="main-content">
             <div class="topbar">
                 <div >
-                    <button id="btn-logout" class="join-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    <button id="btn-logout" class="kill-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
             </div>
 
@@ -99,23 +99,31 @@
                 </table>
             </div>
 
+            <div class="section" id="recursos">
+                <table id="recursos-table" class="tabla" border="1" style="width:100%; margin-top:10px;">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Cantidad</th>
+                        <th>Usuario</th>
+                        <th>Siniestro</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
             <!-- Perfil -->
             <div id="profile-section" class="section">
                 <div class="perfil">
                     <div class="profile">
-                        <div id="avatar">
-                            <img src="img/perfil.jpg" alt="foto de perfil">
-                            <div class="user-info">
-                                <h2> Nombre: Patricia Marlene Bravo Reyes</h2>
-                                <h2>Usuario: mar n</h2>
-                                <h2>Tipo de usuario: voluntario</h2>
-                                <p>Activa desde septiembre del 2024</p>
-                            </div>
-                        </div>
+
                     </div>
                     <!-- Info -->
                     <div class="info">
-                        <h3>Puntos: 150xp</h3>
                         <h3>Insignias</h3>
                         <div class="badges">
                             <img src="img/flamita.png" alt="Flamita">
@@ -126,6 +134,29 @@
                 </div>
             </div>
 
+        </div>
+
+        <div id="modal-recursos" class="modal">
+            <div class="modal-content">
+                <h3>Nuevos recursos</h3>
+                <form id="recursos-form">
+                    <input type="hidden" id="recursos_id">
+                    <input type="hidden" id="siniestro_id" value="">
+
+                    <input type="text" id="name" placeholder="Nombre del recurso" required>
+                    <input type="text" id="description" placeholder="Descripcion" required>
+                    <label>Categoría</label>
+                    <select name="category" id="category" required>
+                        <option value="consumible">Consumible</option>
+                        <option value="material">Material</option>
+                    </select>
+
+                    <input type="number" id="cantidad" placeholder="Cantidad de recursos" required>
+
+                    <button type="submit">Guardar</button>
+                    <button type="button" id="cerrar-modal-recursos">Cancelar</button>
+                </form>
+            </div>
         </div>
 
         <!-- Modal Crear Siniestro -->
@@ -182,6 +213,43 @@
     <script src="js/jquery-3.7.1.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+
+    <style>
+        .join-btn {
+            position: relative;
+            background: #ff7043;
+            border: none;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;}
+        .join-btn .dropdown {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #ffffffff;
+            border: 1px solid #ffffffff;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+            padding: 8px 0;
+            min-width: 140px;
+            z-index: 1000; }
+        .join-btn:hover .dropdown { display: block;     background: #ffffffff;}
+        .join-btn .dropdown button {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            text-align: left;
+            cursor: pointer;}
+        .join-btn .dropdown button:hover {
+            background: #e2b3b3ff;
+        }
+
+    </style>
 </body>
 
 </html>

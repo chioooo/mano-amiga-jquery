@@ -72,6 +72,7 @@ $(document).ready(function () {
             } else {
                 alert(res.message);
             }
+            $("body").removeClass("login-register").addClass("main-page");
 
             cargarPosts();
         }, "json");
@@ -106,6 +107,7 @@ $(document).ready(function () {
                 if (response.status === "success") {
                     // Regresar al login
                     $("#main-page").hide();
+                    $("body").removeClass("main-page").addClass("login-register");
                     $("#login-page").show();
                 }
             },
@@ -139,6 +141,51 @@ $(document).ready(function () {
 
     // Cerrar
     $("#modal-usuarios").click(function (e) {
+        if (e.target === this) {
+            $(this).removeClass("active");
+        }
+    });
+
+    //como voluntario
+    $(document).on("click", ".btn-volu", function () {
+        let siniestroId = $(this).data("siniestro-id");
+
+        $.post("ajax/usuarios/usuarios_update_voluntario.php", {
+            siniestro_id: siniestroId
+        }, function (res) {
+            if (res.status === "success") {
+                alert("Te has unido como voluntario al siniestro.");
+            } else {
+                alert(res.message);
+            }
+        }, "json");
+    });
+
+    //como voluntario y donador
+    $(document).on("click", ".btn-volu-don", function () {
+        let siniestroId = $(this).data("siniestro-id");
+        $("#siniestro_id").val(siniestroId);
+        $("#modal-recursos").addClass("active");
+
+        $("#recursos-form").data("volu-don", true);
+    });
+
+    // Abrir modal recursos
+    $(document).on("click", ".btn-don", function () {
+        let siniestroId = $(this).data("siniestro-id");
+        $("#siniestro_id").val(siniestroId);
+        $("#modal-recursos").addClass("active");
+        $("#recursos-form")[0].reset();
+        $("#recursos_id").val("");
+    });
+
+    // cerrar modal recursos
+    $("#cerrar-modal-recursos").click(function () {
+        $("#modal-recursos").removeClass("active");
+    });
+
+    // Cerrar
+    $("#modal-recursos").click(function (e) {
         if (e.target === this) {
             $(this).removeClass("active");
         }
@@ -297,13 +344,23 @@ $(document).ready(function () {
                     </div>
 
                     <div class="post-footer">
-                        <button class="join-btn">Quiero unirme</button>
-                        <span class="counter">0 voluntarios</span>
+                        
+                        <div class="join-btn">
+                            Quiero unirme
+                            <div class="dropdown">
+                                <button class="btn-volu" data-siniestro-id="${s.id}">Como voluntario</button>
+                                <button class="btn-don" data-siniestro-id="${s.id}">Como donador</button>
+                                <button class="btn-volu-don" data-siniestro-id="${s.id}">Como voluntario y donador</button>
+                            </div>
+                        </div>
+                        <span class="counter">${s.total_voluntarios} voluntarios</span>
+
                     </div>
                 </div>
             `);
             });
         }, "json");
+        $("body").removeClass("login-register").addClass("main-page");
     }
 
     //cargar usuarios
@@ -419,5 +476,110 @@ $(document).ready(function () {
     $(document).on("click", ".btn-delete-user", function () {
         usuariosIdToDelete = $(this).data("id");
         $("#confirmUsuarioDeleteDialog").dialog("open");
+    });
+
+    //ver perfil
+    function verperfil(){
+        $.get("ajax/usuarios/usuarios_gets.php", function (res) {
+            let tbody = $(".profile");
+            tbody.empty();
+            if (res) {
+                let siniestroHtml = "";
+                if (res.siniestro_id) {
+                    siniestroHtml = `
+                    <div class="siniestro-info">
+                        <h3>🔥 Siniestro unido</h3>
+                        <p><strong>Nivel:</strong> ${res.siniestro_level}</p>
+                        <p><strong>Dirección:</strong> ${res.siniestro_location}</p>
+                        <p><strong>Fecha y hora:</strong> ${res.siniestro_date}</p>
+                    </div>
+                `;
+                } else {
+                    siniestroHtml = `<div class="siniestro-info"><p>No estás unido a ningún siniestro.</p></div>`;
+                }
+
+                tbody.append(`
+                <div class="perfil-container">
+                    <div id="avatar">
+                        <img src="img/perfil.jpg" alt="foto de perfil">
+                        <div class="user-info">
+                            <h2>Nombre: ${res.full_name}</h2>
+                            <h2>Usuario: ${res.username}</h2>
+                            <h2>Tipo de usuario: ${res.is_admin == 1 ? "Administrador" : "Voluntario"}</h2>
+                            <p>Activ@ desde ${res.fecha_registro}</p>
+                        </div>
+                    </div>
+                    ${siniestroHtml}
+                </div>
+            `);
+            }
+        }, "json");
+    }
+
+    $(".menu-item[data-section='profile-section']").click(function () {
+        verperfil();
+    });
+
+    //guardar recurso
+    $("#recursos-form").submit(function (e) {
+        e.preventDefault();
+        let id = $("#recursos_id").val();
+        let name = $("#name").val();
+        let description = $("#description").val();
+        let category = $("#category").val();
+        let quantity = $("#cantidad").val();
+        let siniestro_id = $("#siniestro_id").val();
+
+        let url = id ? "ajax/siniestros/siniestros_update.php" : "ajax/recursos/recursos_add.php";
+
+        $.post(url, {
+            id,
+            name,
+            description,
+            category,
+            quantity,
+            siniestro_id
+        }, function (res) {
+            if (res.status === "success") {
+
+                if ($("#recursos-form").data("volu-don")) {
+                    $.post("ajax/usuarios/usuarios_update_voluntario.php", {
+                        siniestro_id: siniestro_id
+                    });
+                }
+
+                $("#modal-recursos").removeClass('active');
+                $("#recursos-form")[0].reset();
+                $("#recursos_id").val("");
+                $("#recursos-form").removeData("volu-don");
+            } else {
+                alert(res.message);
+            }
+        }, "json");
+    });
+
+    //cargar recursos
+    function cargarRecursos() {
+        $.get("ajax/recursos/recursos_list.php", function (res) {
+            let tbody = $("#recursos-table tbody");
+            tbody.empty();
+            res.forEach(u => {
+                tbody.append(`
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.name}</td>
+                    <td>${u.description}</td>
+                    <td>${u.category}</td>
+                    <td>${u.quantity}</td>
+                    <td>${u.usuario_id}</td>
+                    <td>${u.siniestro_id}</td>
+                </tr>
+            `);
+            });
+        }, "json");
+    }
+
+    $(".menu-item[data-section='recursos']").click(function () {
+        cargarRecursos();
     });
 });
