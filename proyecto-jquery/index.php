@@ -154,7 +154,7 @@
                     <input type="hidden" id="usuario_id">
                     <input type="text" id="fullname" placeholder="Nombre completo" required>
                     <input type="text" id="username" placeholder="Nombre de usuario" required>
-                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <input type="password" id="password" placeholder="Contraseña">
                     <label>Administrador: </label>
                     <input type="checkbox" id="is_admin" checked>
                     <button type="submit">Guardar</button>
@@ -163,10 +163,17 @@
             </div>
         </div>
 
-        <div id="confirmDeleteDialog" title="Confirmar eliminación" style="display:none;">
+        <div id="confirmSiniestroDeleteDialog" title="Confirmar eliminación" style="display:none;">
             <p>
                 <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
                 ¿Seguro que deseas eliminar este siniestro? Esta acción no se puede deshacer ⚠️
+            </p>
+        </div>
+
+        <div id="confirmUsuarioDeleteDialog" title="Confirmar eliminación" style="display:none;">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                ¿Seguro que deseas eliminar este usuario? Esta acción no se puede deshacer ⚠️
             </p>
         </div>
 
