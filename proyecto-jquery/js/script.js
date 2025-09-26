@@ -233,7 +233,7 @@ $(document).ready(function () {
 // boton eliminar
     $(document).on("click", "#btn-delete", function () {
         siniestroIdToDelete = $(this).data("id");
-        $("#confirmDeleteDialog").dialog("open");
+        $("#confirmSiniestroDeleteDialog").dialog("open");
     });
 
     // Cargar siniestros en tabla
@@ -306,6 +306,7 @@ $(document).ready(function () {
         }, "json");
     }
 
+    //cargar usuarios
     function cargarUsuarios() {
         $.get("ajax/usuarios/usuarios_list.php", function (res) {
             let tbody = $("#usuarios-table tbody");
@@ -319,8 +320,9 @@ $(document).ready(function () {
                     <td>${u.is_admin === 1 ? "Sí" : "No"}</td>
                     <td>${u.siniestro_id || ''}</td>
                     <td>
-                        <button id="btn-edit-user" class="edit" data-id="${u.id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button id="btn-delete-user" class="delete" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
+                        <button class="btn-edit-user edit" data-id="${u.id}"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn-delete-user delete" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
+
                     </td>
                 </tr>
             `);
@@ -332,7 +334,7 @@ $(document).ready(function () {
         cargarUsuarios();
     });
 
-    // Editar usuario
+    // Abrir editar usuario
     $(document).on("click", "#btn-edit-user", function () {
         let id = $(this).data("id");
 
@@ -347,5 +349,75 @@ $(document).ready(function () {
                 $("#modal-usuarios").addClass("active");
             }
         }, "json");
+    });
+
+    // Editar usuario
+    $("#usuario-form").submit(function (e) {
+        e.preventDefault();
+
+        let id = $("#usuario_id").val();
+        let fullname = $("#fullname").val();
+        let username = $("#username").val();
+        let password = $("#password").val();
+        let is_admin = $("#is_admin").is(":checked") ? 1 : 0;
+
+        $.post("ajax/usuarios/usuarios_update.php", {
+            id,
+            fullname,
+            username,
+            password,
+            is_admin
+        }, function (res) {
+            if (res.status === "success") {
+                $("#modal-usuarios").removeClass("active");
+                $("#usuario-form")[0].reset();
+                $("#usuario_id").val("");
+                cargarUsuarios();
+            } else {
+                alert(res.message);
+            }
+        }, "json");
+    });
+
+    // Eliminar usuarios
+    let usuariosIdToDelete = null;
+    $("#confirmUsuarioDeleteDialog").dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: false,
+        width: 400,
+        buttons: {
+            "Eliminar": function () {
+                if (usuariosIdToDelete) {
+                    $.ajax({
+                        url: "ajax/usuarios/usuarios_delete.php",
+                        type: "POST",
+                        data: {id: usuariosIdToDelete},
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.status === "success") {
+                                cargarUsuarios();
+                            } else {
+                                alert("Error: " + response.message);
+                            }
+                            usuariosIdToDelete = null;
+                        },
+                        error: function () {
+                            alert("Error al conectar con el servidor ❌");
+                        }
+                    });
+                }
+                $(this).dialog("close");
+            },
+            "Cancelar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    // boton eliminar
+    $(document).on("click", ".btn-delete-user", function () {
+        usuariosIdToDelete = $(this).data("id");
+        $("#confirmUsuarioDeleteDialog").dialog("open");
     });
 });
