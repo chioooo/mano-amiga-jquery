@@ -122,15 +122,6 @@
                     <div class="profile">
 
                     </div>
-                    <!-- Info -->
-                    <div class="info">
-                        <h3>Insignias</h3>
-                        <div class="badges">
-                            <img src="img/flamita.png" alt="Flamita">
-                            <img src="img/Novato.png" alt="Novato apaga fuegos">
-                            <img src="img/Exp_apg_f.png" alt="Experto apaga fuegos">
-                        </div>
-                    </div>
                 </div>
             </div>
 

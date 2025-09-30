@@ -155,6 +155,7 @@ $(document).ready(function () {
         }, function (res) {
             if (res.status === "success") {
                 alert("Te has unido como voluntario al siniestro.");
+                cargarPosts();
             } else {
                 alert(res.message);
             }
@@ -243,7 +244,7 @@ $(document).ready(function () {
 
     // Eliminar siniestros
     let siniestroIdToDelete = null;
-    $("#confirmDeleteDialog").dialog({
+    $("#confirmSiniestroDeleteDialog").dialog({
         autoOpen: false,
         modal: true,
         resizable: false,
@@ -392,7 +393,7 @@ $(document).ready(function () {
     });
 
     // Abrir editar usuario
-    $(document).on("click", "#btn-edit-user", function () {
+    $(document).on("click", ".btn-edit-user", function () {
         let id = $(this).data("id");
 
         $.get("ajax/usuarios/usuarios_get.php", {id}, function (res) {
@@ -423,6 +424,8 @@ $(document).ready(function () {
         if (password.trim() !== '') {
             data.password = password;
         }
+
+        console.log("Datos para actualizar usuario:", { id, fullname, username, is_admin, password });
 
         $.post("ajax/usuarios/usuarios_update.php", data, function (res) {
             if (res.status === "success") {
@@ -552,6 +555,7 @@ $(document).ready(function () {
                 $("#recursos-form")[0].reset();
                 $("#recursos_id").val("");
                 $("#recursos-form").removeData("volu-don");
+                cargarPosts();
             } else {
                 alert(res.message);
             }

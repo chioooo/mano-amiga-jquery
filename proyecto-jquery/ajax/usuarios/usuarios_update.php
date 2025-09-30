@@ -6,7 +6,7 @@ $id = intval($_POST["id"] ?? 0);
 $full_name = $_POST["fullname"] ?? "";
 $username = $_POST["username"] ?? "";
 $password = $_POST["password"] ?? "";
-$is_admin = intval($_POST["active"] ?? 0);
+$is_admin = intval($_POST["is_admin"] ?? 0);
 
 if ($id <= 0) {
     echo json_encode(["status" => "error", "message" => "ID inválido"]);
