@@ -19,7 +19,8 @@ CREATE TABLE usuarios (
     full_name VARCHAR(255) NOT NULL, 
     username VARCHAR(255) NOT NULL, 
     password VARCHAR(255) NOT NULL, 
-    is_admin BOOLEAN NOT NULL DEFAULT FALSE, 
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     siniestro_id INT DEFAULT NULL,
     FOREIGN KEY (siniestro_id) REFERENCES siniestros(id) 
 ) ENGINE=InnoDB;
